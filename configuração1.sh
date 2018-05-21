@@ -26,7 +26,7 @@
 # 1. gerando a  vlan1 usando a ferramenta ifconfig e vconfig
 ifconfig eth0 up
 vconfig add eth0 1
-ifconfig eth0.1 192.168.1.1 netmask 255.255.255.0
+#ifconfig eth0.1 192.168.77.1 netmask 255.255.255.0
 ifconfig eth0.1 up
 ifconfig eth0.1 down
 vconfig rem eth0.1
@@ -62,5 +62,7 @@ ip link set vlan1 up
 brctl addif switch1 vm0c0
 # ativa o link vm0c0
 ip link set vm0c0 up
+ip addr add 192.168.1.1/24 dev switch1
+ip set switch1 up
 
 
