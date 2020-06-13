@@ -1,32 +1,35 @@
-#### = VirtualBox =
+# VirtualBox
 
 
 
 Este artigo é relativo à configuração do Virtualbox no Debian Stretch. Para informações relativas à configuração no Debian Jessie, acesse este [artigo]([.:virtualbox_jessie|outro)].
 
-#### Instalação 
+## Instalação 
 
 
 
 O repositório do Debian Stretch não disponibiliza um pacote para o Virtualbox. Entretanto, é possível instalá-lo adicionando o repositório do Virtualbox conforme descrito em [e repetido abaixo:
 
-  * Para adicionar o repositório do Virtualbox cria-se um arquivo ''/etc/apt/sources.list.d/virtualbox.list'' com o conteúdo:
-
+* Para adicionar o repositório do Virtualbox cria-se um arquivo ''/etc/apt/sources.list.d/virtualbox.list'' com o conteúdo:
+```bash
   deb http://download.virtualbox.org/virtualbox/debian stretch contrib
+```
 
-  * Para adicionar a chave do repositório:
-
+* Para adicionar a chave do repositório:
+```bash
   wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
   apt-key add oracle_vbox_2016.asc
+```
 
-  * Após adicionada a chave, basta atualizar os repositórios e instalar o pacote:
-
+* Após adicionada a chave, basta atualizar os repositórios e instalar o pacote:
+```bash
   apt-get update
   apt-get install virtualbox-5.1
+```
 
-Após a instalação do VirtualBox, basta abrir o gerenciador de máquinas virtuais através do menu de aplicações ou do comando ''virtualbox''. No gerenciador de aplicações pode-se criar as máquinas virtuais, reservando um espaço em disco, que pode ser alocado dinamicamente. Por padrão, os dados das máquinas virtuais são armazenados no diretório ''~/Virtualbox VMs''.
+Após a instalação do VirtualBox, basta abrir o gerenciador de máquinas virtuais através do menu de aplicações ou do comando *virtualbox*. No gerenciador de aplicações pode-se criar as máquinas virtuais, reservando um espaço em disco, que pode ser alocado dinamicamente. Por padrão, os dados das máquinas virtuais são armazenados no diretório ''~/Virtualbox VMs''.
 
-#### Detalhes da configuração da rede 
+## Detalhes da configuração da rede 
 
 
 
@@ -36,51 +39,49 @@ Nas versões acima de 2.0 do Virtualbox, é possível configurá-lo diretamente 
 
 Com VMs Windows, também é possível utilizar o //Guest Additions// para configurar uma pasta compartilhada com o host. Após instalar o //Guest Additions//, basta acessar o menu Dispositivos->Pastas Compartilhadas->Configuração de Pastas Compartilhadas. O compartilhamento aparece no Windows com o nome de ''VBOXSVR''.
 
-#### Comandos para gerenciamento de máquinas virtuais a partir da linha de comando 
-
-
+## Comandos para gerenciamento de máquinas virtuais a partir da linha de comando 
 
 O VirtualBox disponibiliza alguns comandos para o gerenciamento das máquinas virtuais. Seguem alguns:
 
-  * Para ligar uma máquina virtual, pode-se utilizar o comando ''VBoxHeadless'':
-
+* Para ligar uma máquina virtual, pode-se utilizar o comando ''VBoxHeadless'':
+```bash
   VBoxHeadless --startvm <nome da máquina virtual>
+```
 
-  * Para desligar uma máquina virtual simulando o acionamento do botão power, pode-se utilizar o comando:
-
+* Para desligar uma máquina virtual simulando o acionamento do botão power, pode-se utilizar o comando:
+```bash
   VBoxManage controlvm <nome da máquina virtual> acpipowerbutton
+```
 
-  * Para desligar uma máquina virtual de maneira forçada, pode-se utilizar o comando:
-
+* Para desligar uma máquina virtual de maneira forçada, pode-se utilizar o comando:
+```bash
   VBoxManage controlvm <nome da máquina virtual> poweroff
+```
 
-  * Para listar as máquinas virtuais disponíveis:
-
+* Para listar as máquinas virtuais disponíveis:
+```bash
   VBoxManage list vms
+```
 
-  * Para listar as máquinas virtuais em execução:
-
+* Para listar as máquinas virtuais em execução:
+```bash
   VBoxManage list runningvms
+```
+## Comandos para gerenciamento de discos 
 
-#### Comandos para gerenciamento de discos 
-
-
-
-  * Para redimensionar uma imagem de disco:
-
+* Para redimensionar uma imagem de disco:
+```bash
   VBoxManage modifyhd <arquivo de imagem> --resize <tamanho em MB>
+```
 
-#### Execução automática da máquina virtual 
-
-
+## Execução automática da máquina virtual 
 
 ### Usando um serviço do system.d 
-
-
 
 É possível criar um serviço do //system.d// para iniciar automaticamente uma máquina virtual. Serviços personalizados do //system.d// costumam ficar no diretório ''/etc/systemd/system''. Segue um exemplo de um arquivo de configuração de um serviço para iniciar uma máquina virtual chamada ''debian-vm'' do usuário ''administrador'':
 
 Arquivo ''/etc/systemd/system/debian-vm.service''
+```bash
 <file>
 [Unit]([https://wiki.debian.org/VirtualBox#Debian_9_.22Stretch.22]])
 Description=Virtualbox Headless VM
@@ -93,18 +94,18 @@ User=administrador
 [Install](Service])
 WantedBy=multi-user.target
 </file>
+```
 
-### Usando um script 
-
-
+## Usando um script 
 
 Se desejado, uma máquina virtual pode ser iniciada diretamente com o comando:
-
+```bash
   vboxsdl -vm nome-da-máquina
+```
 
 Incluindo esse comando num //script// de execução automática do gerenciador de janelas utilizado, é possível iniciar automaticamente uma máquina virtual quando o sistema é iniciado. No //WindowMaker//, basta editar o arquivo ''~/GNUstep/Library/WindowMaker/autostart'' e adicionar a linha de comando acima seguida de '&', para execução em segundo plano (se não for executado em segundo plano, a máquina virtual não é iniciada no //WindowMaker//). Caso o arquivo ''autostart'' não exista, basta criá-lo com permissões de leitura, escrita e execução para o usuário em questão.
 
-#### Referências 
+## Referências 
 [liria](https://www.liria.com.br/wiki/doku.php?id=wiki:linux:config:virtualbox:virtualbox)
 
 # Rede Virtualizada - Linux
