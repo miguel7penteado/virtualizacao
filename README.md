@@ -39,6 +39,30 @@ Nas versões acima de 2.0 do Virtualbox, é possível configurá-lo diretamente 
 
 Com VMs Windows, também é possível utilizar o //Guest Additions// para configurar uma pasta compartilhada com o host. Após instalar o //Guest Additions//, basta acessar o menu Dispositivos->Pastas Compartilhadas->Configuração de Pastas Compartilhadas. O compartilhamento aparece no Windows com o nome de ''VBOXSVR''.
 
+## Adicionando usuário ao grupo da gerenciamento da Máquinas Virtuais
+
+```bash
+sudo usermod -a -G vboxusers meu_usuario
+```
+
+## Mapeando dispositivos USB do hardware real para máquina virtual
+
+```bash
+# Lista máquinas virtuais
+VBoxManage list vms
+```
+
+```bash
+# Lista conexões USB no hardware real
+VBoxManage list usbhost
+```
+```bash
+# Mapeia uma conexão USB na máquina virtual
+VBoxManage controlvm nome_maquina_virtual usbattach identificador_dispositivo_usb
+```
+
+
+
 ## Comandos para gerenciamento de máquinas virtuais a partir da linha de comando 
 
 O VirtualBox disponibiliza alguns comandos para o gerenciamento das máquinas virtuais. Seguem alguns:
@@ -67,6 +91,7 @@ O VirtualBox disponibiliza alguns comandos para o gerenciamento das máquinas vi
 ```bash
   VBoxManage list runningvms
 ```
+
 ## Comandos para gerenciamento de discos 
 
 * Para redimensionar uma imagem de disco:
