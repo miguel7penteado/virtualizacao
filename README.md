@@ -45,6 +45,17 @@ Com VMs Windows, também é possível utilizar o //Guest Additions// para config
 sudo usermod -a -G vboxusers meu_usuario
 ```
 
+## Ativando virtualização dentro das máquinas virtuais
+
+```bash
+# Lista máquinas virtuais
+VBoxManage list vms
+```
+
+```bash
+vboxmanage modifyvm "vm1" --nested-hw-virt on
+```
+
 ## Mapeando dispositivos USB do hardware real para máquina virtual
 
 ```bash
