@@ -8,6 +8,15 @@
 ```powershell
 powershell New-VHD -Path $env:UserProfile\openwrt.vhdx -Dynamic -SizeBytes 8GB
 ```
+Ajuste as permissões do arquivo para o usuario que você usará no mapeamento de rede:
+
+```cmd
+takeown /f openwrt.vhdx
+icacls     openwrt.vhdx /inheritance:d
+icacls     openwrt.vhdx /grant meu_usuario:f
+icacls     openwrt.vhdx /remove Todos
+```
+
 ## Crinado um ponto de montagem linux no windows
 
 
