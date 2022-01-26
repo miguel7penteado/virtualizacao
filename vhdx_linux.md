@@ -25,6 +25,30 @@ sudo mkdir -p /mnt/windows &&
 sudo mount -t cifs -o username="meu_usuario",password="minha_senha",uid=$(id -u),gid=$(id -g) //172.31.192.1/compartilhamento /mnt/windows
 ```
 
+```bash
+# imagem para sistemas UEFI
+curl -OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz --progress-bar
+# Opcional - Imagem para sistemas BIOS
+# curl -OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined.img.gz --progress-bar
+
+# Descompacte o arquivo imagem openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz
+gunzip openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz
+
+# mapeie o arquivo imagem em um dispositivo de dispositivo de bloco loopback
+losetup /dev/loop0 openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img
+
+# recarregue as tabelas de partição da imagem mapeada
+sudo partprobe /dev/loop0
+
+# liste as partições
+lsblk
+
+# monte o as patições que você quiser
+mkdir -p /tmp/particao1
+mount -t vfat /dev/loop0p1 /tmp/particao1
+```
+
+
 
 # Montando um disco VHDX no linux
 
@@ -79,8 +103,6 @@ sudo umount "$PONTO_DE_MONTAGEM" && sudo qemu-nbd -d /dev/nbd0 && sudo rmmod nbd
 
 
 ```bash
-wget https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-rootfs.img.gz
-wget https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-kernel.bin
 
 
 parted /dev/sdb
