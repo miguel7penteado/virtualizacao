@@ -27,9 +27,9 @@ sudo mount -t cifs -o username="meu_usuario",password="minha_senha",uid=$(id -u)
 
 ```bash
 # imagem para sistemas UEFI
-curl -OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz --progress-bar
+curl -O https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz --progress-bar
 # Opcional - Imagem para sistemas BIOS
-# curl -OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined.img.gz --progress-bar
+# curl -O https://downloads.openwrt.org/releases/21.02.1/targets/x86/64/openwrt-21.02.1-x86-64-generic-ext4-combined.img.gz --progress-bar
 
 # Descompacte o arquivo imagem openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz
 gunzip openwrt-21.02.1-x86-64-generic-ext4-combined-efi.img.gz
