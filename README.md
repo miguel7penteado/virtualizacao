@@ -110,6 +110,15 @@ O VirtualBox disponibiliza alguns comandos para o gerenciamento das máquinas vi
   VBoxManage modifyhd <arquivo de imagem> --resize <tamanho em MB>
 ```
 
+## Mapear Discos físicos como imagens VMDK
+
+* No Linux
+```
+# Supondo que você queira criar um disco chamado disco3.vmdk que mapeie todo o dispositivo de disco /dev/sdc
+vboxmanage createmedium disk --filename=disco3.vmdk  --format=VMDK --variant RawDisk --property RawDrive=/dev/sdc
+```
+
+
 ## Execução automática da máquina virtual 
 
 ### Usando um serviço do system.d 
